@@ -1,5 +1,11 @@
 // Assignment code here
 
+// Declare variables
+var passwordMinLength = prompt("What do you want the minimum length of the password to be?");
+var passwordMaxLength = prompt("What do you want the maximum length of the password to be?");
+var lowercaseCharacters = confirm("Would you like lowercase characters to be included?")
+var uppercaseCharacters = confirm("Would you like uppercase characters to be included?")
+var specialCharacters = confirm("Would you like special characters to be included?")
 
 // Get references to the #generate element
 var generateBtn = document.querySelector("#generate");
