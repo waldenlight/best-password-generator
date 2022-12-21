@@ -1,11 +1,13 @@
 // Assignment code here
 
+// Prompt user and create/return a password
 function password() {
-  // Declare variables on click
+  // Declare variables
   var passwordMinLength = prompt("What do you want the minimum length of the password to be?");
   var passwordMaxLength = prompt("What do you want the maximum length of the password to be?");
   var lowercaseCharacters = confirm("Would you like lowercase characters to be included?");
   var uppercaseCharacters = confirm("Would you like uppercase characters to be included?");
+  var numbers = confirm("Would you like numbers to be included?")
   var specialCharacters = confirm("Would you like special characters to be included?");
 
   // Set password length
@@ -17,12 +19,13 @@ function password() {
 
   var passwordLength = randomNum(passwordMinLength, passwordMaxLength);
 
-  // Declare arrays to pull from
+  // Declare arrays to pull from in password generation
   var uppercaseAlphabet = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"];
   var lowercaseAlphabet = uppercaseAlphabet.toLocaleString().toLowerCase().split(',');
+  var numberArray = ["0", "1", "2", "3", "4", "6", "7", "8", "9"]
   var specialCharactersArray = ["!", "@", "#", "$", "%", "^", "&", "*", "(", ")", "_", "+", "-", ";", ":"];
 
-  // Generate password
+  // Generate the password
   var generatePassword = function () {
     // Declare empty string
     var password = ""
@@ -42,7 +45,13 @@ function password() {
           password[randomNum(0, passwordLength - 1)] = uppercaseAlphabet[randomNum(0, 25)];
         }
       }
-      // Check if special characters are wanted in addition to the other characters
+      // Check if numbers are wanted in addition to the other characters
+      if (numbers) {
+        for (i = 0; i < passwordLength / 4; i++) {
+          password[randomNum(0, passwordLength - 1)] = numberArray[randomNum(0, 8)];
+        }
+      }
+      // Check if special characters are wanted in addition
       if (specialCharacters) {
         for (i = 0; i < passwordLength / 4; i++) {
           password[randomNum(0, passwordLength - 1)] = specialCharactersArray[randomNum(0, 14)];
@@ -57,7 +66,28 @@ function password() {
       }
       // Split password into an array of characters (as arrays are mutable)
       password = password.split("")
-      // Check if special characters are wanted in addition to the uppercase characters
+      // Check if numbers are wanted in addition to the other characters
+      if (numbers) {
+        for (i = 0; i < passwordLength / 4; i++) {
+          password[randomNum(0, passwordLength - 1)] = numberArray[randomNum(0, 8)];
+        }
+      }
+      // Check if special characters are wanted in addition
+      if (specialCharacters) {
+        for (i = 0; i < passwordLength / 4; i++) {
+          password[randomNum(0, passwordLength)] = specialCharactersArray[randomNum(0, 14)];
+        }
+      }
+    } else if (numbers) {
+      // Check if only numbers are wanted
+      // Create a base password with numbers
+      for (i = 0; i < passwordLength; i++) {
+        var newCharacter = numberArray[randomNum(0, 8)];
+        var password = password + newCharacter;
+      }
+      // Split password into an array of characters (as arrays are mutable)
+      password = password.split("")
+      // Check if special characters are wanted in addition
       if (specialCharacters) {
         for (i = 0; i < passwordLength / 4; i++) {
           password[randomNum(0, passwordLength)] = specialCharactersArray[randomNum(0, 14)];
@@ -73,7 +103,7 @@ function password() {
     }
 
     // Message if no characters are selected
-    if (!lowercaseCharacters && !uppercaseCharacters && !specialCharacters) {
+    if (!lowercaseCharacters && !uppercaseCharacters && !numbers && !specialCharacters) {
       alert("You must enter some character criteria")
     }
 
